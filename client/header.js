@@ -399,6 +399,8 @@ Template.header_breadcrumb_puzzle.events({
     breadcrumbs_var.set(crumbs);
     if (crumbs.length === 1) {
       navigate("/");
+    } else {
+      navigate("/puzzles/" + lastCrumb.id);
     }
   }
 });
