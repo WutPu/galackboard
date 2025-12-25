@@ -58,6 +58,8 @@ page("/statistics", StatisticsPage);
 page("/logistics", LogisticsPage);
 page.redirect("/callins", "/logistics");
 page("/projector", ProjectorPage);
+page("/stats", StatsPage);
+
 
 export function BlackboardPage() {
   scrollAfter(() => {
@@ -144,6 +146,14 @@ export function StatisticsPage(ctx) {
     end_time: maybeDate(params.get("end_time")),
   });
   Page("statistics", "general", "0", false);
+}
+
+export function StatsPage() {
+  Page("stats", "general", "0", true, true);
+  Session.set({
+    topRight: null,
+    color: "inherit",
+  });
 }
 
 function Page(page, type, id, has_chat, splitter) {
