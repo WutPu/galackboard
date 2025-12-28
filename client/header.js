@@ -26,7 +26,7 @@ const privateMessageTransform = (msg) => ({
 });
 
 Template.header_loginmute.onCreated(function () {
-  this.visibleTab = new ReactiveVar("private");
+  this.visibleTab = new ReactiveVar("mention");
 });
 
 function unreadHelper(filter) {
@@ -402,6 +402,12 @@ Template.header_breadcrumb_puzzle.events({
     } else {
       navigate("/puzzles/" + lastCrumb.id);
     }
+  }
+});
+
+Template.header_lastchats.events({
+  "click .bb-lastchat"(event, template) {
+    navigate("/oplogs");
   }
 });
 
