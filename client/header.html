@@ -219,11 +219,9 @@
           </ul>
           <div class="dropdown-menu tabbable">
             <ul class="nav nav-inverse nav-tabs">
-              <!--
               <li class="{{#if isVisible "private"}}active{{/if}}" data-tab="private"><a name="">
                 Private Messages{{#if unread_private}} <span class="badge badge-important">{{unread_private}}</span>{{/if}}
               </a></li>
-              -->
               <li class="{{#if isVisible "mention"}}active{{/if}}" data-tab="mention"><a name="">
                 Mentions{{#if unread_mentions}} <span class="badge badge-warning">{{unread_mentions}}</span>{{/if}}
               </a></li>
@@ -232,7 +230,6 @@
               {{/if}}
             </ul>
             <div class="tab-content">
-              <!--
               <div class="bb-chat-messages tab-pane {{#if isVisible "private"}}active{{/if}}">
                 {{#each privateMessages}}
                   {{>media_message}}
@@ -240,7 +237,6 @@
                   <h5>No Private Messages</h5>
                 {{/each}}
               </div>
-              -->
               <div class="bb-chat-messages tab-pane {{#if isVisible "mention"}}active{{/if}}">
                 {{#each mentions}}
                   {{>media_message}}

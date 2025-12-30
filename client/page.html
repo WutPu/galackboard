@@ -45,14 +45,12 @@
       {{else vertical_splitter (not topRight)}}
         {{>Template.dynamic template=topRight}}
       {{else}}
-        {{#unless currentPageEquals "blackboard"}}
-            {{> embedded_chat}}
-            <div class="bb-chat-pop-out {{#if not topRight}}in-margin{{/if}}">
-              <a href="/chat/{{type}}/{{id}}" class="bb-pop-out"
-                  target="chat0"><i class="fas fa-external-link-alt"></i>
-            Pop out</a>
-            </div>
-        {{/unless}}
+        {{> embedded_chat}}
+        <div class="bb-chat-pop-out {{#if not topRight}}in-margin{{/if}}">
+          <a href="/chat/{{type}}/{{id}}" class="bb-pop-out"
+              target="chat0"><i class="fas fa-external-link-alt"></i>
+        Pop out</a>
+        </div>
       {{/horizontal_splitter}}
     </div>
   {{else}}
