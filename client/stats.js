@@ -89,7 +89,6 @@ Template.stats.helpers({
         var counter = 1;
 
         for (const element of r_puzzles) {
-            console.log(element.name, element._id, association[element._id], solve_precent[association[element._id]]);
             if (counter >= 10) {
                 break;
             }
