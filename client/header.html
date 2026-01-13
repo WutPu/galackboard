@@ -11,7 +11,7 @@
 
 <template name="header_breadcrumb_blackboard">
   <li class="{{#if active}}active{{/if}}">
-    <a href="/">✈<span class="bb-omit-when-narrow"> Home</span></a>
+    <a href="/">🖼️<span class="bb-omit-when-narrow"> Home</span></a>
   </li>
 </template>
 
@@ -163,14 +163,49 @@
 {{else}}
   {{#if currentPageEquals "logistics_page"}}
     <div class="btn-group bb-unlock-group">
+{{#if currentPageEquals "stats"}}
+  <div class="btn-group bb-unlock-group">
     <a href="/" title="Back to home"
             class="btn btn-small btn-inverse {{#unless sessionNick}}disabled{{/unless}}">
       <i class="fas fa-home"></i>
     </a>
-    </div>
+  </div>
+{{else}}
+  <div class="btn-group">
+    <a href="/stats" class="btn btn-small btn-inverse" title="Stats">
+      <i class="fas fa-chart-area"></i>
+    </a>
+  </div>
+  {{#if currentPageEquals "blackboard"}}
+      <div class="btn-group bb-unlock-group">
+      {{#if canEdit}}
+      <a href="/" title="Protect page" data-canEdit="false"
+              class="bb-protect btn btn-small btn-inverse active">
+        <i class="fas fa-lock"></i>
+      </a>
+      {{else}}
+      <a href="/edit" title="Edit puzzles on this page" data-canEdit="true"
+              class="bb-unprotect btn btn-small btn-inverse {{#unless sessionNick}}disabled{{/unless}}">
+        <i class="fas fa-lock-open"></i>
+      </a>
+      {{/if}}
+      <a href="/logistics" title="Open big board to edit puzzles"
+              class="btn btn-small btn-inverse {{#unless sessionNick}}disabled{{/unless}}">
+        <i class="fas fa-pencil"></i>
+      </a>
+      </div>
   {{else}}
-    {{> calendar_dropdown}}
-    {{> options_dropdown}}
+    {{#if currentPageEquals "logistics_page"}}
+      <div class="btn-group bb-unlock-group">
+      <a href="/" title="Back to home"
+              class="btn btn-small btn-inverse {{#unless sessionNick}}disabled{{/unless}}">
+        <i class="fas fa-home"></i>
+      </a>
+      </div>
+    {{else}}
+      {{> calendar_dropdown}}
+      {{> options_dropdown}}
+    {{/if}}
   {{/if}}
 {{/if}}
     <div class="btn-group">

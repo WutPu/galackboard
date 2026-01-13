@@ -353,7 +353,7 @@ Template.blackboard.events({
 
 Template.blackboard.onRendered(function () {
   //  page title
-  $("title").text("Galackboard");
+  $("title").text("PGalackboard");
   $("#bb-tables .bb-puzzle .puzzle-name > a").tooltip({ placement: "left" });
 });
 

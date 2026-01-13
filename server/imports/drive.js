@@ -18,8 +18,12 @@ const GDRIVE_SPREADSHEET_MIME_TYPE = "application/vnd.google-apps.spreadsheet";
 const XLSX_MIME_TYPE =
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 const MAX_RESULTS = 200;
+<<<<<<< HEAD
 const SPREADSHEET_TEMPLATE = Assets.getBinaryAsync("spreadsheet-template.xlsx");
 const GOOGLE_SHEET_TEMPLATE_ID = SHEET_TEMPLATE_ID();
+=======
+// const SPREADSHEET_TEMPLATE = Assets.getBinaryAsync("spreadsheet-template.xlsx");
+>>>>>>> origin/2025
 
 const PERMISSION_LIST_FIELDS =
   "permissions(role,type,emailAddress,allowFileDiscovery)";
@@ -113,16 +117,29 @@ async function ensureNamedPermissions(drive, id, email) {
 const spreadsheetSettings = {
   titleFunc: WORKSHEET_NAME,
   driveMimeType: GDRIVE_SPREADSHEET_MIME_TYPE,
-  uploadMimeType: XLSX_MIME_TYPE,
-  async uploadTemplate() {
-    // The file is small enough to fit in ram, so don't recreate a file read
-    // stream every time.
-    // Apparently there's a module called streamifier that does this.
-    const r = new Readable();
-    r._read = function () {};
-    r.push(await SPREADSHEET_TEMPLATE);
-    r.push(null);
-    return r;
+  async uploadTemplate(drive, targetFolderId, name) {
+    const rootFolder = await awaitOrEnsureFolder(drive, ROOT_FOLDER_NAME());
+    const query = await drive.files.list({
+      q: `name='template' and mimeType='${GDRIVE_SPREADSHEET_MIME_TYPE}' and '${rootFolder.id}' in parents`,
+      pageSize: 1,
+    });
+
+    const templateFile = query.data.files[0];
+    if (!templateFile) {
+      throw new Error("template spreadsheet not found");
+    }
+
+    const copy = await drive.files.copy({
+      fileId: templateFile.id,
+      requestBody: {
+        name: WORKSHEET_NAME(name),
+        parents: [targetFolderId],
+      },
+    });
+
+    await ensurePermissions(drive, copy.data.id);
+
+    return copy.data;
   },
 };
 

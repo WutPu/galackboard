@@ -26,7 +26,7 @@ const privateMessageTransform = (msg) => ({
 });
 
 Template.header_loginmute.onCreated(function () {
-  this.visibleTab = new ReactiveVar("private");
+  this.visibleTab = new ReactiveVar("mention");
 });
 
 function unreadHelper(filter) {
@@ -399,6 +399,8 @@ Template.header_breadcrumb_puzzle.events({
     breadcrumbs_var.set(crumbs);
     if (crumbs.length === 1) {
       navigate("/");
+    } else {
+      navigate("/puzzles/" + lastCrumb.id);
     }
     // See puzzle.js for the iframe black magic we're doing here.
     const spreadsheetId = this.id && Puzzles.findOne(this.id)?.spreadsheet;
@@ -406,6 +408,12 @@ Template.header_breadcrumb_puzzle.events({
       const spreadsheetIframe = document.getElementById(`bb-spreadsheet-${spreadsheetId}`)
       spreadsheetIframe.remove();
     }
+  }
+});
+
+Template.header_lastchats.events({
+  "click .bb-lastchat"(event, template) {
+    navigate("/oplogs");
   }
 });
 

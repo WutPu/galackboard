@@ -23,7 +23,11 @@ if (DO_BATCH_PROCESSING) {
   Meteor.startup(async function () {
     const robot = new Robot(BOTNAME, BOT_GRAVATAR);
     // register scripts
-    robot.privately(hubot_help);
+    if (robot.router) {
+      robot.privately(hubot_help);
+    } else {
+      console.warn("hubot-help skipped: no router available");
+    }
     robot.loadExternalScripts(EXTERNAL_SCRIPTS);
     for (let name in scripts) {
       const script = scripts[name];
