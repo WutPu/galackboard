@@ -18,12 +18,8 @@ const GDRIVE_SPREADSHEET_MIME_TYPE = "application/vnd.google-apps.spreadsheet";
 const XLSX_MIME_TYPE =
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 const MAX_RESULTS = 200;
-<<<<<<< HEAD
 const SPREADSHEET_TEMPLATE = Assets.getBinaryAsync("spreadsheet-template.xlsx");
 const GOOGLE_SHEET_TEMPLATE_ID = SHEET_TEMPLATE_ID();
-=======
-// const SPREADSHEET_TEMPLATE = Assets.getBinaryAsync("spreadsheet-template.xlsx");
->>>>>>> origin/2025
 
 const PERMISSION_LIST_FIELDS =
   "permissions(role,type,emailAddress,allowFileDiscovery)";
